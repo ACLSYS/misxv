@@ -1,0 +1,160 @@
+/* main.css — layout general (mobile-first: base = móvil, luego min-width) */
+body {
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--texto);
+  overflow-x: clip;
+  background-color: #f1eaf9;
+  background-image:
+    radial-gradient(60% 38% at 12% 14%, rgba(169,143,210,.50), transparent 70%),
+    radial-gradient(55% 34% at 92% 42%, rgba(201,178,235,.60), transparent 70%),
+    radial-gradient(70% 38% at 18% 74%, rgba(169,143,210,.45), transparent 70%),
+    radial-gradient(60% 30% at 85% 98%, rgba(201,178,235,.55), transparent 70%);
+}
+section { position: relative; }   /* agrégalo dentro de tu regla section existente */
+
+/* ---------- Hero (foto) ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;          /* texto arriba, sobre el cielo */
+  text-align: center;
+  color: var(--lila-claro);
+  padding: calc(3.5rem + env(safe-area-inset-top, 0px)) 1.25rem 5rem;
+  background: linear-gradient(180deg, #4b2e6b 0%, #5f3a86 60%, #7a52a8 100%);
+  text-shadow: 0 1px 14px rgba(30, 10, 45, .55);
+}
+.hero-foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 70%;          /* mantiene a las chicas visibles abajo */
+  z-index: 0;
+}
+.hero::after {                          /* velo: oscuro arriba para leer el texto, suave abajo */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(48,24,72,.62) 0%, rgba(48,24,72,.25) 45%, rgba(48,24,72,0) 75%);
+}
+.hero-contenido { position: relative; z-index: 3; width: 100%; max-width: 560px; }
+.hero .laurel { color: var(--lila-claro); }
+.nombre {
+  font-family: var(--fuente-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2.4rem, 12vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: #fff;
+  text-wrap: balance;
+}
+.fecha { font-size: 1.05rem; letter-spacing: .03em; color: #fff; }
+.linea { width: 48px; height: 1px; background: var(--lila-claro); opacity: .7; margin: 1.2rem auto; }
+.desliza {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  font-size: .85rem;
+  letter-spacing: .06em;
+  color: #fff;
+  animation: rebote 2s ease-in-out infinite;
+}
+@keyframes rebote { 0%,100% { transform: translate(-50%,0); } 50% { transform: translate(-50%,6px); } }
+
+/* Zoom lento al abrir el sobre */
+.bienvenida.oculta ~ .hero .hero-foto { animation: acercar 14s ease-out forwards; }
+@keyframes acercar { from { transform: scale(1); } to { transform: scale(1.08); } }
+
+/* Esquinas y flores del hero por encima del velo */
+.hero .esq, .hero .flores { z-index: 2; }
+
+@media (min-width: 600px) {
+  .nombre { font-size: clamp(3.2rem, 8vw, 4.8rem); }
+  .hero-foto { object-position: center 65%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .desliza { animation: none; }
+  .bienvenida.oculta ~ .hero .hero-foto { animation: none; }
+}
+
+/* ---------- Secciones ---------- */
+section {
+  max-width: var(--ancho-contenido);
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem;
+  text-align: center;
+}
+.titulo-seccion {
+  font-family: var(--fuente-display);
+  font-weight: 600; font-size: 1.6rem; line-height: 1.25;
+  color: var(--titulo); margin-bottom: 1rem;
+  text-wrap: balance;
+}
+.texto { font-weight: 300; font-size: 1.05rem; line-height: 1.7; }
+.texto strong { font-weight: 600; }
+.bloque-extra { margin-top: 1.4rem; }
+.bloque-extra .texto:first-child { font-weight: 600; }
+.cuenta { text-align: center; }
+
+footer {
+  text-align: center;
+  padding: 3rem 1.25rem calc(4rem + env(safe-area-inset-bottom, 0px));
+  color: var(--acento-texto);
+  font-size: 0.9rem; letter-spacing: 0.03em;
+}
+
+/* ---------- Reveal al hacer scroll (solo si hay JS) ---------- */
+.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.js .reveal.visible { opacity: 1; transform: none; }
+
+/* ---------- Tablet ---------- */
+@media (min-width: 600px) {
+  :root { --ancho-contenido: 560px; }
+  section { padding: 5rem 2rem; }
+  .titulo-seccion { font-size: 1.9rem; }
+  .nombre { font-size: clamp(3.5rem, 9vw, 5.5rem); }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 900px) {
+  :root { --ancho-contenido: 720px; }
+  .nombre { font-size: 6rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .desliza { animation: none; }
+}
+
+/* ---------- Íconos y ornamentos SVG ---------- */
+.ico, .esq, .divisor, .corona, .laurel {
+  fill: none; stroke: currentColor; stroke-width: 1.6;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.ico { display: block; width: 44px; height: 44px; margin: 0 auto .6rem; color: var(--titulo); }
+.divisor { display: block; width: 180px; height: 20px; margin: 0 auto; color: var(--lila); }
+.corona { display: block; width: 72px; height: 44px; margin: 0 auto .6rem; }
+.laurel { display: block; width: 120px; height: 120px; margin: 0 auto 1rem; }
+.laurel text { fill: currentColor; stroke: none; font-family: var(--fuente-display); font-style: italic; }
+.esq { position: absolute; z-index: 2; width: 84px; height: 84px; pointer-events: none; }
+.esq-ia { top: calc(.75rem + env(safe-area-inset-top, 0px)); left: .75rem; color: var(--lila-claro); }
+.esq-fd { bottom: calc(.75rem + env(safe-area-inset-bottom, 0px)); right: .75rem; transform: rotate(180deg); color: var(--lila); }
+
+/* ---------- Flores (imágenes PNG/WebP transparentes) ---------- */
+.flores { position: absolute; z-index: 2; height: auto; pointer-events: none; user-select: none; }
+.flores-top  { top: 0; right: 0; width: min(62%, 300px); }
+.flores-lado { top: -30px; left: -24px; width: 44%; max-width: 220px; }
+.flores-pie  { bottom: 0; left: 50%; transform: translateX(-50%); width: min(100%, 520px); }
+footer { position: relative; min-height: 220px; }

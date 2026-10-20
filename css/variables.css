@@ -1,0 +1,29 @@
+/* variables.css — paleta, tipografía y temas */
+:root {
+  /* Paleta base */
+  --uva: #4b2e6b;
+  --lila: #a98fd2;
+  --lila-claro: #e9ddf7;
+  --dorado: #caa23e;
+  --dorado-claro: #f4dc96;
+
+  /* Tema claro (por defecto) */
+  --fondo: #faf7fc;
+  --texto: #352447;
+  --titulo: #4b2e6b;
+  --acento-texto: #7a5aa6;   /* lila oscurecido: contraste AA sobre fondo claro */
+  --tarjeta: #e9ddf7;
+  --tarjeta-texto: #352447;
+  --campo: #ffffff;
+  --borde: #a98fd2;
+  --boton: #4b2e6b;
+
+  /* Tipografía */
+  --fuente-display: 'Playfair Display', Georgia, serif;
+  --fuente-script: 'Alex Brush', cursive;
+  --fuente-texto: 'Lato', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Layout: móvil primero, se amplía en main.css con min-width */
+  --ancho-contenido: 100%;
+}
+
