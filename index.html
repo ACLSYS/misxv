@@ -83,7 +83,12 @@
       </symbol>
     </defs>
   </svg>
-  
+  <symbol id="i-sobre" viewBox="0 0 64 64">
+    <rect x="8" y="16" width="48" height="34" rx="3"/>
+    <path d="M8 19l24 18 24-18"/>
+    <path d="M32 6v6M26 9l6-3 6 3" stroke-width="1.4"/>
+  </symbol>
+</defs>
 
   <!-- 01. Bienvenida / sobre -->
   <div class="bienvenida" id="bienvenida">
@@ -204,15 +209,13 @@
       <p class="texto">Formal</p>
     </section>
 
-    <!-- 10. Regalos -->
-    <section class="reveal">
-      <svg class="ico" aria-hidden="true"><use href="#i-regalo"/></svg>
-      <h2 class="titulo-seccion">Un detalle para nosotras</h2>
-      <p class="texto">Tu presencia es nuestro mejor regalo.<br>Si deseas obsequiarnos algo más, aquí encontrarás los datos:</p>
-      <div class="evento cuenta" style="margin-top:1.4rem;">
-        <p>[Banco]<br>[Número de cuenta / CLABE]<br>[Nombre del titular]</p>
-      </div>
-    </section>
+       <!-- 10. Regalos: lluvia de sobres -->
+       <section class="reveal">
+        <svg class="ico" aria-hidden="true"><use href="#i-sobre"/></svg>
+        <h2 class="titulo-seccion">Un detalle para nosotras</h2>
+        <p class="texto">Tu presencia es nuestro mejor regalo.<br>Si deseas tener un detalle con nosotras,<br>agradeceremos mucho recibirlo en un sobre.</p>
+        <p class="texto bloque-extra">Tendremos una lluvia de sobres  $💌$ </p>
+      </section>
 
     <!-- 11. Confirmación de asistencia -->
     <section class="reveal" id="rsvp">

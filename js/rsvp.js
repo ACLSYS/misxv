@@ -1,27 +1,37 @@
 // rsvp.js — arma el mensaje y abre WhatsApp (no se guarda nada en ningún servidor)
-// Cambia este número por el WhatsApp real (con código de país, sin + ni espacios):
-const WHATSAPP_NUMERO = '5210000000000';
 
 const form = document.getElementById('rsvp-form');
 
 if (form) {
+  // El número viene del HTML: <form ... data-whatsapp="529871163233">
+  const WHATSAPP_NUMERO = form.dataset.whatsapp || '529871163233';
+
+  const selectPases = document.getElementById('rsvp-pases');
+  const bloquePases = selectPases ? selectPases.closest('div') : null;
+
+  // Si no asisten, se oculta el número de asistentes
+  form.querySelectorAll('input[name="asiste"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (bloquePases) bloquePases.hidden = (radio.value === 'no' && radio.checked);
+    });
+  });
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const inputNombre = document.getElementById('rsvp-nombre');
     const nombre = inputNombre.value.trim();
     const asiste = form.querySelector('input[name="asiste"]:checked');
-    const asistentes = document.getElementById('rsvp-pases').value;
 
     if (!nombre) { inputNombre.focus(); return; }
     if (!asiste) return;
 
     const datos = window.invitacion || {};
-    let mensaje = 'Hola, confirmo mi respuesta para los XV.\n\n';
+    let mensaje = 'Hola, confirmo mi respuesta para los XV años de Ana Regina y Zoe Natalia (28 de noviembre).\n\n';
     mensaje += `Nombre: ${nombre}\n`;
 
     if (asiste.value === 'si') {
-      mensaje += `Asistencia: Sí\nAsistentes: ${asistentes}`;
+      mensaje += `Asistencia: Sí, ahí estaré\nAsistentes: ${selectPases.value}`;
     } else {
       mensaje += 'Asistencia: No podré asistir';
     }
