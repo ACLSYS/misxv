@@ -1,0 +1,83 @@
+/* tipografia.css — UNA sola familia (Lato) en todo el sitio, afinada para leer en celular.
+   Cargar después de effects.css (y antes de itinerario.css / detalles.css).
+   Reglas: etiquetas mínimo ~12-13px, texto corrido 18px, contraste AA también en el sobre. */
+
+html { -webkit-text-size-adjust: 100%; }
+body { font-family: var(--fuente-texto); }
+
+/* ---------- Sobre de bienvenida (antes: script/serif, contraste bajo sobre el lila) ---------- */
+.nombre-sobre {
+  font-style: normal; font-weight: 700; font-size: 1.3rem; letter-spacing: .04em;
+  color: #fff; opacity: 1; text-shadow: 0 1px 8px rgba(40, 20, 60, .35);
+}
+.sello span {
+  font-style: normal; font-weight: 700; font-size: 1.05rem;
+  letter-spacing: .16em; padding-left: .16em;     /* compensa el espaciado de la última letra */
+  text-transform: uppercase; color: #5c3d12; transform: none;
+}
+.indicacion {
+  font-weight: 700; font-size: .95rem; letter-spacing: .04em;
+  color: #fff; opacity: 1; text-shadow: 0 1px 8px rgba(40, 20, 60, .35);
+}
+
+/* ---------- Portada ---------- */
+.nombre { font-style: italic; font-weight: 700; letter-spacing: .01em; }
+.fecha  { font-weight: 700; font-size: 1rem; letter-spacing: .04em; text-wrap: balance; }
+.desliza { font-weight: 700; font-size: .9rem; }
+
+/* ---------- Títulos de sección ---------- */
+.titulo-seccion {
+  font-family: var(--fuente-titulo);
+  font-weight: 700; font-size: 1.6rem; line-height: 1.3; letter-spacing: 0;
+}
+
+/* ---------- Texto ---------- */
+.texto { font-weight: 400; font-size: 1.14rem; line-height: 1.7; }
+.texto strong { font-weight: 700; }
+.bloque-extra .texto:first-child {          /* "Nuestra mamá", "Padrinos de…" */
+  font-weight: 700; font-size: .92rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--acento-texto);
+}
+
+/* ---------- Cuenta regresiva ---------- */
+.regresiva .num { font-family: var(--fuente-titulo); font-weight: 700; font-size: clamp(1.8rem, 9vw, 2.3rem); }
+.regresiva .label { font-weight: 700; font-size: .78rem; letter-spacing: .12em; }
+
+/* ---------- Tarjetas de evento ---------- */
+.evento h3 { font-family: var(--fuente-titulo); font-weight: 700; font-size: 1.15rem; line-height: 1.25; }
+.evento p  { font-weight: 400; font-size: 1.08rem; line-height: 1.6; }
+.evento .mapa { font-weight: 700; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; }
+
+/* ---------- Botones ---------- */
+.boton, .enviar { font-weight: 700; font-size: .95rem; letter-spacing: .08em; text-transform: uppercase; }
+
+/* ---------- RSVP (pase de entrada) ---------- */
+.eyebrow { font-weight: 700; font-size: .75rem; letter-spacing: .18em; }
+.nombre-inv { font-family: var(--fuente-titulo); font-weight: 700; font-style: italic; font-size: 1.6rem; line-height: 1.2; }
+.dato { font-weight: 700; font-size: .85rem; }
+.pregunta { font-weight: 700; font-size: .82rem; letter-spacing: .1em; }
+.eleccion span { font-weight: 700; font-size: 1.02rem; }
+.cuenta output { font-family: var(--fuente-titulo); font-weight: 700; font-size: 2rem; }
+.cuenta small { font-size: .82rem; opacity: 1; }
+.nota { font-size: .85rem; opacity: 1; }
+#rsvp .limite { font-size: .85rem; font-weight: 700; }
+.gracias h3 { font-family: var(--fuente-titulo); font-weight: 700; font-size: 1.4rem; line-height: 1.25; }
+.gracias p  { font-weight: 400; font-size: 1.05rem; }
+.btn-sec { font-weight: 700; font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; }
+.cambiar { font-size: .9rem; font-weight: 700; }
+.pase textarea, .campo-nombre input { font-family: var(--fuente-texto); font-weight: 400; }
+
+/* ---------- Secciones con id (ganan a detalles.css, que carga después) ---------- */
+#vestimenta .formal { color: #6a4a9c; font-size: 1rem; }       /* antes #8f73c4: contraste bajo */
+#regalo .gracias-script {                                      /* antes Alex Brush 2rem */
+  font-family: var(--fuente-texto); font-style: italic; font-weight: 700;
+  font-size: 1.45rem; line-height: 1.4; color: #6a4a9c;
+}
+
+/* ---------- Footer ---------- */
+footer { font-size: 1rem; }
+
+@media (min-width: 600px) {
+  .titulo-seccion { font-size: 1.9rem; }
+  .texto { font-size: 1.2rem; }
+}

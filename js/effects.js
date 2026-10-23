@@ -223,7 +223,7 @@
       e.className = 'est est-sec';
       e.setAttribute('aria-hidden', 'true');
       const izq = (j + k) % 2 === 0;
-      e.style.setProperty('--x', (izq ? 2 + Math.random() * 9 : 89 + Math.random() * 9).toFixed(0) + '%');
+      e.style.setProperty('--x', (izq ? 2 + Math.random() * 9 : 82 + Math.random() * 9).toFixed(0) + '%');
       e.style.setProperty('--y', (6 + j * 30 + Math.random() * 20).toFixed(0) + '%');
       e.style.setProperty('--s', (8 + Math.random() * 8).toFixed(0) + 'px');
       e.style.setProperty('--d', (2.8 + Math.random() * 2).toFixed(1) + 's');

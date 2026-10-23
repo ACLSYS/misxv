@@ -1,0 +1,49 @@
+/* itinerario.css — itinerario con íconos (mobile-first: lista vertical; escritorio: 5 columnas)
+   Cargar después de tipografia.css. */
+
+#itinerario .pasos { list-style: none; display: grid; gap: .9rem; margin-top: 1.4rem; padding: 0; }
+
+#itinerario .paso {
+  display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: .9rem;
+  text-align: left; padding: .8rem 1rem; border-radius: 18px;
+  background: rgba(255,255,255,.6); border: 1px solid #c9b2eb;
+  box-shadow: 0 8px 20px rgba(75,46,107,.1);
+}
+#itinerario .ic { display: block; width: 96px; height: auto; overflow: visible; }
+#itinerario .hora {
+  display: inline-block; padding: .28rem .9rem; border-radius: 999px;
+  background: #ebe0f7; color: #4b2e6b;
+  font-weight: 700; font-size: .85rem; letter-spacing: .08em;
+}
+#itinerario .flor { display: block; width: 120px; height: 24px; margin: .4rem 0 .25rem; }
+#itinerario .act {
+  display: block; text-wrap: balance; font-family: var(--fuente-titulo, "Libre Baskerville", Georgia, serif);
+  font-weight: 700; font-size: 1.15rem; line-height: 1.25; color: var(--titulo, #4b2e6b);
+}
+
+/* Entrada escalonada al aparecer la sección (usa el .visible de animations.js) */
+.js #itinerario .paso {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);
+  transition-delay: calc(var(--i, 0) * .12s + .2s);
+}
+.js #itinerario.visible .paso { opacity: 1; transform: none; }
+#itinerario .ic { transition: transform .6s cubic-bezier(.3,1.6,.5,1); }
+#itinerario .paso:active .ic { transform: scale(1.12) rotate(-3deg); }
+
+@media (min-width: 900px) {
+  #itinerario { max-width: 960px; }
+  #itinerario .pasos { grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+  #itinerario .paso {
+    grid-template-columns: 1fr; justify-items: center; align-items: start; align-content: start; text-align: center;
+    background: none; border: 0; box-shadow: none; padding: 0;
+  }
+  #itinerario .ic { width: 100%; max-width: 150px; }
+  #itinerario .flor { margin: .5rem auto .4rem; }
+  #itinerario .hora { font-size: .95rem; }
+  #itinerario .act { font-size: 1.2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js #itinerario .paso { opacity: 1; transform: none; transition: none; }
+  #itinerario .ic { transition: none; }
+}

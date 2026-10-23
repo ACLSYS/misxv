@@ -1,0 +1,19 @@
+/* detalles.css — código de vestimenta y regalos (líneas lila, estilo invitación formal)
+   Cargar después de itinerario.css. */
+
+#vestimenta, #regalo { --d-mor: #4b2e6b; --d-lila: #a98fd2; }
+
+.ico.corona { width: min(100%, 340px); height: auto; aspect-ratio: 420 / 64; margin: 0 auto 1.1rem; color: var(--d-lila); }
+.formal {
+  margin: -.2rem 0 0; padding-left: .38em;           /* compensa el espaciado de la última letra */
+  font-weight: 700; font-size: .95rem; letter-spacing: .38em; text-transform: uppercase;
+  color: #8f73c4;
+}
+.ico.par   { width: min(78%, 270px); height: auto; aspect-ratio: 210 / 140; margin: 1.6rem auto 0; color: var(--d-mor); }
+.ico.sobre { width: min(94%, 320px); height: auto; aspect-ratio: 300 / 100; margin: 1.2rem auto 1.5rem; color: var(--d-mor); }
+
+#regalo .texto { color: var(--d-mor); }
+.gracias-script {
+  margin-top: 1.8rem; font-family: var(--fuente-script, "Alex Brush", cursive);
+  font-size: 2rem; line-height: 1.3; color: #7a52a8; text-wrap: balance;
+}

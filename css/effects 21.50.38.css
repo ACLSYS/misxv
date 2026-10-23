@@ -1,0 +1,186 @@
+/* effects.css — efectos para móvil (iPhone first)
+   Solo animan transform / opacity (y brillos cortos) para ir fluido en Safari iOS.
+   Todo se activa desde js/effects.js; si el JS falla, la invitación se ve normal. */
+
+:root {
+  --oro: #e8c97a;
+  --oro-claro: #f3d98c;
+}
+
+.sello, .ico, .redes a { -webkit-tap-highlight-color: transparent; }
+
+/* ---------- 1. Nombre del hero: letra por letra + ola de brillo dorado ---------- */
+.nombre .pal { display: inline-block; white-space: nowrap; }
+.nombre .letra {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, .45em, 0) scale(.92);
+  filter: blur(6px);
+}
+.hero.listo .nombre .letra {
+  animation:
+    letra-in .9s cubic-bezier(.2, .7, .2, 1) both,
+    letra-brillo 3.6s ease-in-out infinite;
+  animation-delay:
+    calc(.45s + var(--i) * .055s),
+    calc(2.4s + var(--i) * .13s);
+}
+.hero.fuera .nombre .letra { animation-play-state: paused; }
+
+@keyframes letra-in {
+  to { opacity: 1; transform: none; filter: none; }
+}
+@keyframes letra-brillo {
+  0%, 45%, 100% { text-shadow: 0 1px 14px rgba(30, 10, 45, .55); color: #fff; }
+  22% {
+    text-shadow: 0 0 8px rgba(243, 217, 140, .95), 0 0 20px rgba(232, 201, 122, .65), 0 1px 14px rgba(30, 10, 45, .55);
+    color: #fff6dc;
+  }
+}
+
+/* ---------- 2. Títulos de sección: palabra por palabra ---------- */
+.titulo-seccion .p {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, .6em, 0);
+}
+.reveal.visible .titulo-seccion .p {
+  animation: palabra .75s cubic-bezier(.2, .7, .2, 1) forwards;
+  animation-delay: calc(.15s + var(--i) * .09s);
+}
+@keyframes palabra { to { opacity: 1; transform: none; } }
+
+/* ---------- 3. Cuenta regresiva: giro al cambiar el número ---------- */
+.regresiva .num { transform-origin: 50% 80%; }
+.regresiva .num.flip { animation: flip .45s cubic-bezier(.3, .7, .3, 1); }
+@keyframes flip {
+  from { transform: perspective(300px) rotateX(-75deg); opacity: 0; }
+  to   { transform: perspective(300px) rotateX(0);      opacity: 1; }
+}
+
+/* ---------- 4. Ornamentos que se dibujan solos (laurel, esquinas, íconos) ---------- */
+.js .dibujar {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+.js .dibujar.trazado {
+  opacity: 1;
+  animation: trazar var(--dur, 1.8s) cubic-bezier(.4, 0, .2, 1) var(--ret, 0s) forwards;
+}
+@keyframes trazar { to { stroke-dashoffset: 0; } }
+
+/* "XV" del laurel aparece cuando el trazo casi termina (var heredada por <use>) */
+.js .laurel.dibujar { --xv: 0; }
+.xv { opacity: var(--xv, 1); stroke-dasharray: none; }
+
+/* Divisores: se abren desde el centro */
+.js .divisor.abrir { clip-path: inset(0 50% 0 50%); opacity: .3; }
+.js .divisor.abrir.abierto {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  transition: clip-path 1.2s cubic-bezier(.3, .7, .2, 1), opacity 1s ease;
+}
+
+/* ---------- 5. Vida continua (suave, se pausa fuera de pantalla) ---------- */
+.ico.vivo   { animation: flotar 4.5s ease-in-out infinite; }
+.esq.vivo   { animation: respira 6s ease-in-out infinite; }
+.laurel.vivo { animation: brilla 5s ease-in-out infinite; }
+.vivo.fuera { animation-play-state: paused; }
+
+@keyframes flotar  { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -4px, 0); } }
+@keyframes respira { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+@keyframes brilla  {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(232, 201, 122, 0)); }
+  50%      { filter: drop-shadow(0 0 8px rgba(232, 201, 122, .7)); }
+}
+
+/* Toque en un ícono: rebote con destello */
+.ico.toque { animation: toque .6s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes toque {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.28) rotate(-6deg); filter: drop-shadow(0 0 8px rgba(232, 201, 122, .9)); }
+  70%  { transform: scale(.95) rotate(3deg); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- 6. Sello: onda de luz + chispas/pétalos al abrir ---------- */
+.sello .onda {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid rgba(255, 235, 170, .9);
+  pointer-events: none;
+  animation: onda .8s ease-out forwards;
+}
+@keyframes onda {
+  from { transform: scale(1);   opacity: .9; }
+  to   { transform: scale(2.2); opacity: 0; }
+}
+
+.chispa {
+  position: fixed;
+  z-index: 30;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 6px rgba(232, 201, 122, .9);
+  will-change: transform, opacity;
+}
+.chispa.petalo {
+  width: 10px;
+  height: 14px;
+  border-radius: 70% 0 70% 0;
+  box-shadow: none;
+}
+
+/* ---------- 7. Polvo dorado flotando en el hero ---------- */
+.hero .polvo {
+  position: absolute;
+  z-index: 2;
+  bottom: -12px;
+  left: var(--x);
+  width: var(--t);
+  height: var(--t);
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff6d8, var(--oro) 60%, transparent 72%);
+  opacity: 0;
+  pointer-events: none;
+  animation: subir var(--d) linear var(--r) infinite;
+  will-change: transform, opacity;
+}
+.hero.fuera .polvo { animation-play-state: paused; }
+@keyframes subir {
+  0%   { opacity: 0; transform: translate3d(0, 0, 0); }
+  12%  { opacity: .9; }
+  80%  { opacity: .6; }
+  100% { opacity: 0; transform: translate3d(var(--dx), calc(var(--alto) * -1), 0); }
+}
+
+/* ---------- Destellos (estrellitas) ---------- */
+.est {
+  position: absolute; z-index: 1; left: var(--x); top: var(--y);
+  width: var(--s, 10px); height: var(--s, 10px);
+  background: var(--c, var(--oro-claro));
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  opacity: 0; pointer-events: none;
+  animation: titila var(--d, 3.2s) ease-in-out var(--r, 0s) infinite;
+}
+.est-sec { --c: #d6a93f; z-index: 0; }          /* dorado más oscuro: se ve sobre el fondo lila claro */
+.fuera .est { animation-play-state: paused; }
+@keyframes titila {
+  0%, 100% { opacity: 0; transform: scale(.3) rotate(0deg); }
+  50%      { opacity: .95; transform: scale(1) rotate(45deg); }
+}
+
+/* ---------- 8. Parallax de flores ---------- */
+.flores-top, .flores-lado { will-change: transform; }
+
+/* ---------- Accesibilidad ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .nombre .letra, .titulo-seccion .p { opacity: 1; transform: none; filter: none; animation: none !important; }
+  .js .dibujar { stroke-dasharray: none; stroke-dashoffset: 0; opacity: 1; animation: none !important; }
+  .js .divisor.abrir { clip-path: none; opacity: 1; }
+  .vivo, .ico.toque, .regresiva .num.flip, .hero .polvo, .est { animation: none !important; }
+}

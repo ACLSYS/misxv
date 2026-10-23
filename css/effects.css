@@ -75,11 +75,11 @@
 .xv { opacity: var(--xv, 1); stroke-dasharray: none; }
 
 /* Divisores: se abren desde el centro */
-.js .divisor.abrir { clip-path: inset(0 50% 0 50%); opacity: .3; }
+.js .divisor.abrir { transform: scaleX(.04); opacity: 0; }
 .js .divisor.abrir.abierto {
-  clip-path: inset(0 0 0 0);
+  transform: none;
   opacity: 1;
-  transition: clip-path 1.2s cubic-bezier(.3, .7, .2, 1), opacity 1s ease;
+  transition: transform 1.2s cubic-bezier(.3, .7, .2, 1), opacity 1s ease;
 }
 
 /* ---------- 5. Vida continua (suave, se pausa fuera de pantalla) ---------- */
@@ -158,6 +158,22 @@
   100% { opacity: 0; transform: translate3d(var(--dx), calc(var(--alto) * -1), 0); }
 }
 
+/* ---------- Destellos (estrellitas) ---------- */
+.est {
+  position: absolute; z-index: 1; left: var(--x); top: var(--y);
+  width: var(--s, 10px); height: var(--s, 10px);
+  background: var(--c, var(--oro-claro));
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  opacity: 0; pointer-events: none;
+  animation: titila var(--d, 3.2s) ease-in-out var(--r, 0s) infinite;
+}
+.est-sec { --c: #d6a93f; z-index: 0; }          /* dorado más oscuro: se ve sobre el fondo lila claro */
+.fuera .est { animation-play-state: paused; }
+@keyframes titila {
+  0%, 100% { opacity: 0; transform: scale(.3) rotate(0deg); }
+  50%      { opacity: .95; transform: scale(1) rotate(45deg); }
+}
+
 /* ---------- 8. Parallax de flores ---------- */
 .flores-top, .flores-lado { will-change: transform; }
 
@@ -165,6 +181,6 @@
 @media (prefers-reduced-motion: reduce) {
   .nombre .letra, .titulo-seccion .p { opacity: 1; transform: none; filter: none; animation: none !important; }
   .js .dibujar { stroke-dasharray: none; stroke-dashoffset: 0; opacity: 1; animation: none !important; }
-  .js .divisor.abrir { clip-path: none; opacity: 1; }
-  .vivo, .ico.toque, .regresiva .num.flip, .hero .polvo { animation: none !important; }
+  .js .divisor.abrir { transform: none; opacity: 1; }
+  .vivo, .ico.toque, .regresiva .num.flip, .hero .polvo, .est { animation: none !important; }
 }

@@ -1,0 +1,42 @@
+/* ornamentos.css — flores y ornamentos SVG a lo largo de toda la invitación + crédito del footer.
+   Todo es CSS puro (SVG como fondo): sin JS, sin imágenes extra, sin animar nada.
+   Cargar al final, después de detalles.css. */
+
+/* ---------- 1. Enredadera con flores en los dos bordes, de arriba a abajo del <main> ---------- */
+main { position: relative; }
+main::before, main::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 20px;
+  pointer-events: none; z-index: 0; opacity: .7;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 320' width='20' height='320'><path d='M10 0C16 20 4 60 10 80C16 100 4 140 10 160C16 180 4 220 10 240C16 260 4 300 10 320' fill='none' stroke='%23a98fd2' stroke-width='1.2' stroke-linecap='round'/><g fill='%23d9c8f4' stroke='%23a98fd2' stroke-width='.6'><ellipse cx='15' cy='26' rx='2.4' ry='5' transform='rotate(40 15 26)'/><ellipse cx='5' cy='54' rx='2.4' ry='5' transform='rotate(-40 5 54)'/><ellipse cx='15' cy='106' rx='2.4' ry='5' transform='rotate(40 15 106)'/><ellipse cx='5' cy='134' rx='2.4' ry='5' transform='rotate(-40 5 134)'/><ellipse cx='15' cy='186' rx='2.4' ry='5' transform='rotate(40 15 186)'/><ellipse cx='5' cy='214' rx='2.4' ry='5' transform='rotate(-40 5 214)'/><ellipse cx='15' cy='266' rx='2.4' ry='5' transform='rotate(40 15 266)'/><ellipse cx='5' cy='294' rx='2.4' ry='5' transform='rotate(-40 5 294)'/></g><g fill='%23f7f1fd' stroke='%23a98fd2' stroke-width='.7'><g transform='translate(10 80)'><ellipse cy='-4.2' rx='2.6' ry='4.4'/><ellipse cy='-4.2' rx='2.6' ry='4.4' transform='rotate(72)'/><ellipse cy='-4.2' rx='2.6' ry='4.4' transform='rotate(144)'/><ellipse cy='-4.2' rx='2.6' ry='4.4' transform='rotate(216)'/><ellipse cy='-4.2' rx='2.6' ry='4.4' transform='rotate(288)'/><circle r='2' fill='%23d9a93f' stroke='none'/></g><g transform='translate(10 240)'><ellipse cy='-4.2' rx='2.6' ry='4.4'/><ellipse cy='-4.2' rx='2.6' ry='4.4' transform='rotate(72)'/><ellipse cy='-4.2' rx='2.6' ry='4.4' transform='rotate(144)'/><ellipse cy='-4.2' rx='2.6' ry='4.4' transform='rotate(216)'/><ellipse cy='-4.2' rx='2.6' ry='4.4' transform='rotate(288)'/><circle r='2' fill='%23d9a93f' stroke='none'/></g></g><circle cx='10' cy='160' r='2.2' fill='%23d9a93f'/></svg>") repeat-y center top / 20px 320px;
+}
+main::before { left: 0; }
+main::after  { right: 0; transform: scaleX(-1); }
+
+/* ---------- 2. Ramo de flores en una esquina de cada sección (izq. abajo / der. arriba, alternando) ---------- */
+main > section::after {
+  content: ""; position: absolute; z-index: -1; width: 90px; height: 120px;
+  pointer-events: none; opacity: .45;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 120' width='90' height='120'><path d='M2 118C20 96 30 70 46 52C54 42 58 28 64 8' fill='none' stroke='%23a98fd2' stroke-width='1.6' stroke-linecap='round'/><g fill='%23d9c8f4' stroke='%23a98fd2' stroke-width='.8'><ellipse cx='14' cy='104' rx='4' ry='9' transform='rotate(-55 14 104)'/><ellipse cx='30' cy='84' rx='4' ry='9' transform='rotate(40 30 84)'/><ellipse cx='33' cy='66' rx='4' ry='9' transform='rotate(-50 33 66)'/><ellipse cx='56' cy='40' rx='4' ry='9' transform='rotate(45 56 40)'/><ellipse cx='58' cy='24' rx='4' ry='9' transform='rotate(-35 58 24)'/></g><g fill='%23f7f1fd' stroke='%23a98fd2' stroke-width='1'><g transform='translate(46 52)'><ellipse cy='-8' rx='5' ry='8.5'/><ellipse cy='-8' rx='5' ry='8.5' transform='rotate(72)'/><ellipse cy='-8' rx='5' ry='8.5' transform='rotate(144)'/><ellipse cy='-8' rx='5' ry='8.5' transform='rotate(216)'/><ellipse cy='-8' rx='5' ry='8.5' transform='rotate(288)'/><circle r='3.6' fill='%23d9a93f' stroke='none'/></g><g transform='translate(66 14) scale(.62)'><ellipse cy='-8' rx='5' ry='8.5'/><ellipse cy='-8' rx='5' ry='8.5' transform='rotate(72)'/><ellipse cy='-8' rx='5' ry='8.5' transform='rotate(144)'/><ellipse cy='-8' rx='5' ry='8.5' transform='rotate(216)'/><ellipse cy='-8' rx='5' ry='8.5' transform='rotate(288)'/><circle r='3.6' fill='%23d9a93f' stroke='none'/></g><g transform='translate(20 90) scale(.55)'><ellipse cy='-8' rx='5' ry='8.5'/><ellipse cy='-8' rx='5' ry='8.5' transform='rotate(72)'/><ellipse cy='-8' rx='5' ry='8.5' transform='rotate(144)'/><ellipse cy='-8' rx='5' ry='8.5' transform='rotate(216)'/><ellipse cy='-8' rx='5' ry='8.5' transform='rotate(288)'/><circle r='3.6' fill='%23d9a93f' stroke='none'/></g></g><g fill='%23d9a93f'><circle cx='9' cy='112' r='1.6'/><circle cx='40' cy='34' r='1.6'/><circle cx='72' cy='30' r='1.4'/></g></svg>") no-repeat center / contain;
+}
+main > section:nth-of-type(odd)::after  { left: -34px;  bottom: 6px; }
+main > section:nth-of-type(even)::after { right: -34px; top: 6px; transform: scaleX(-1); }
+
+/* ---------- 3. Florón bajo cada título de sección ---------- */
+.titulo-seccion::after {
+  content: ""; display: block; width: 132px; height: 14px; margin: .7rem auto 0;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 132 14' width='132' height='14'><path d='M2 7H48M84 7H130' fill='none' stroke='%23a98fd2' stroke-width='1.2' stroke-linecap='round'/><g fill='%23d9c8f4' stroke='%23a98fd2' stroke-width='.6'><ellipse cx='53' cy='5' rx='3.6' ry='1.6' transform='rotate(-20 53 5)'/><ellipse cx='79' cy='5' rx='3.6' ry='1.6' transform='rotate(20 79 5)'/></g><g transform='translate(66 7)' fill='%23f7f1fd' stroke='%23a98fd2' stroke-width='.7'><ellipse cy='-3.2' rx='1.9' ry='3.2'/><ellipse cy='-3.2' rx='1.9' ry='3.2' transform='rotate(72)'/><ellipse cy='-3.2' rx='1.9' ry='3.2' transform='rotate(144)'/><ellipse cy='-3.2' rx='1.9' ry='3.2' transform='rotate(216)'/><ellipse cy='-3.2' rx='1.9' ry='3.2' transform='rotate(288)'/><circle r='1.5' fill='%23d9a93f' stroke='none'/></g><circle cx='57' cy='7' r='1.2' fill='%23d9a93f'/><circle cx='75' cy='7' r='1.2' fill='%23d9a93f'/></svg>") no-repeat center / contain;
+}
+
+/* ---------- 4. Footer: crédito del desarrollador ---------- */
+.footer-credit {
+  position: relative; z-index: 3;                 /* por encima de las flores del pie */
+  width: fit-content; margin: 1rem auto 0; padding: 0 1rem;
+  border-radius: 999px; background: rgba(255, 255, 255, .88);
+  font-size: .95rem; letter-spacing: .02em; color: #352447;
+}
+.footer-credit a {
+  display: inline-block; padding: .7rem .4rem;    /* zona táctil de 44px */
+  color: #3773C5; font-weight: 700;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.footer-credit a:active { opacity: .7; }

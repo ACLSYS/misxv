@@ -18,12 +18,13 @@
   --borde: #a98fd2;
   --boton: #4b2e6b;
 
-  /* Tipografía */
-  --fuente-display: 'Playfair Display', Georgia, serif;
-  --fuente-script: 'Alex Brush', cursive;
-  --fuente-texto: 'Lato', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Tipografía: UNA sola familia (Lato) en todo el sitio.
+     display / script / titulo apuntan a la misma, así nada vuelve a otra fuente. */
+  --fuente-texto: 'Lato', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --fuente-display: var(--fuente-texto);
+  --fuente-script: var(--fuente-texto);
+  --fuente-titulo: var(--fuente-texto);
 
   /* Layout: móvil primero, se amplía en main.css con min-width */
   --ancho-contenido: 100%;
 }
-
