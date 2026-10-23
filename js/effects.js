@@ -151,6 +151,8 @@
     }
   }
 
+  window.efectos = { chispas };   // lo usa rsvp.js para el confeti
+
   // Toque en cualquier ícono: rebote + destello
   document.addEventListener('pointerdown', e => {
     const ico = e.target.closest && e.target.closest('.ico');
@@ -212,6 +214,24 @@
   } else {
     abrirHero();
   }
+
+  /* ---------- Destellos dorados por toda la invitación ---------- */
+  $$('main section.reveal').forEach((sec, k) => {
+    const cantidad = sec.id === 'rsvp' ? 2 : 3;
+    for (let j = 0; j < cantidad; j++) {
+      const e = document.createElement('i');
+      e.className = 'est est-sec';
+      e.setAttribute('aria-hidden', 'true');
+      const izq = (j + k) % 2 === 0;
+      e.style.setProperty('--x', (izq ? 2 + Math.random() * 9 : 89 + Math.random() * 9).toFixed(0) + '%');
+      e.style.setProperty('--y', (6 + j * 30 + Math.random() * 20).toFixed(0) + '%');
+      e.style.setProperty('--s', (8 + Math.random() * 8).toFixed(0) + 'px');
+      e.style.setProperty('--d', (2.8 + Math.random() * 2).toFixed(1) + 's');
+      e.style.setProperty('--r', (Math.random() * 3).toFixed(1) + 's');
+      sec.appendChild(e);
+    }
+    pausador.observe(sec);
+  });
 
   /* ---------- 6. Parallax suave de las flores ---------- */
   const paralelos = [['.flores-top', 0.12], ['.flores-lado', 0.08]]

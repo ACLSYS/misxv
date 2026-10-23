@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="css/variables.css">
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/effects.css">   <!-- después de main.css -->
+<link rel="stylesheet" href="css/effects.css">
 </head>
 <body>
 
@@ -81,14 +81,13 @@
       <symbol id="i-tiktok" viewBox="0 0 64 64">
         <path d="M36 10v28a10 10 0 1 1-10-10M36 10c1 7 6 12 14 13"/>
       </symbol>
+      <symbol id="i-sobre" viewBox="0 0 64 64">
+        <rect x="8" y="16" width="48" height="34" rx="3"/>
+        <path d="M8 19l24 18 24-18"/>
+        <path d="M32 6v6M26 9l6-3 6 3" stroke-width="1.4"/>
+      </symbol>
     </defs>
   </svg>
-  <symbol id="i-sobre" viewBox="0 0 64 64">
-    <rect x="8" y="16" width="48" height="34" rx="3"/>
-    <path d="M8 19l24 18 24-18"/>
-    <path d="M32 6v6M26 9l6-3 6 3" stroke-width="1.4"/>
-  </symbol>
-</defs>
 
   <!-- 01. Bienvenida / sobre -->
   <div class="bienvenida" id="bienvenida">
@@ -217,28 +216,73 @@
         <p class="texto bloque-extra">Tendremos una lluvia de sobres  $💌$ </p>
       </section>
 
-    <!-- 11. Confirmación de asistencia -->
+    <!-- 11. Confirmación de asistencia: pase de entrada -->
     <section class="reveal" id="rsvp">
       <h2 class="titulo-seccion">Confirma tu asistencia</h2>
-      <p class="texto">Esta invitación es para:<br><strong data-invitado>[Nombre del invitado]</strong></p>
-      <p class="texto">Confirma tu asistencia a más tardar<br>el 18 de noviembre de 2026.</p>
-      <form class="rsvp-form" id="rsvp-form" data-whatsapp="529871163233" data-limite="2026-11-18">
-        <div>
-          <label for="rsvp-nombre">Nombre y apellido</label>
-          <input type="text" id="rsvp-nombre" autocomplete="name" required>
-        </div>
-        <fieldset>
-          <legend>¿Nos acompañarás?</legend>
-          <div class="opciones">
-            <label class="opcion"><input type="radio" name="asiste" value="si" required> Sí, ahí estaré</label>
-            <label class="opcion"><input type="radio" name="asiste" value="no"> No podré asistir</label>
+      <div class="limite"><i></i><span id="limite-txt">Confirma a más tardar el 18 de noviembre</span></div>
+
+      <form class="pase" id="rsvp-form" data-whatsapp="529871163233" data-limite="2026-11-18" novalidate>
+        <div class="pase-top" id="pase-cabeza">
+          <span class="brillo"></span><span class="reflejo"></span>
+          <i class="est" style="--x:9%;--y:22%;--s:11px;--d:3.4s;--r:.2s"></i>
+          <i class="est" style="--x:88%;--y:18%;--s:8px;--d:2.8s;--r:1.1s"></i>
+          <i class="est" style="--x:20%;--y:78%;--s:7px;--d:3.8s;--r:.7s"></i>
+          <i class="est" style="--x:80%;--y:74%;--s:12px;--d:3.1s;--r:1.8s"></i>
+          <i class="est" style="--x:50%;--y:6%;--s:6px;--d:2.6s;--r:2.3s"></i>
+          <p class="eyebrow">Pase de entrada · XV años</p>
+          <h3 class="nombre-inv" data-invitado>Querido invitado</h3>
+          <div class="datos">
+            <span class="dato" id="dato-pases-wrap" hidden><b id="dato-pases">4</b> <span id="dato-pases-txt">personas</span></span>
+            <span class="dato" id="dato-mesa-wrap" hidden>Mesa <b id="dato-mesa"></b></span>
+            <span class="dato">28 · nov · 2026</span>
           </div>
-        </fieldset>
-        <div>
-          <label for="rsvp-pases">Número de asistentes</label>
-          <select id="rsvp-pases"></select>
         </div>
-        <button type="submit" class="boton">Confirmar por WhatsApp</button>
+        <div class="perfora"></div>
+
+        <div class="pase-body">
+          <div class="campo-nombre" id="campo-nombre" hidden>
+            <label class="pregunta" for="rsvp-nombre">Nombre y apellido</label>
+            <input type="text" id="rsvp-nombre" autocomplete="name">
+          </div>
+
+          <fieldset>
+            <legend class="pregunta">¿Nos acompañarás?</legend>
+            <div class="elecciones">
+              <label class="eleccion"><input type="radio" name="asiste" value="si"><span><b>♥</b>Sí, ahí estaré</span></label>
+              <label class="eleccion"><input type="radio" name="asiste" value="no"><span><b>✕</b>No podré asistir</span></label>
+            </div>
+          </fieldset>
+
+          <div class="plegable cerrado" id="bloque-pases">
+            <div>
+              <span class="pregunta">¿Cuántos asistirán?</span>
+              <div class="contador">
+                <button type="button" id="menos" aria-label="Quitar uno">−</button>
+                <div class="cuenta"><output id="num" aria-live="polite">1</output><small id="max-txt"></small></div>
+                <button type="button" id="mas" aria-label="Agregar uno">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="pregunta" for="mensaje">Mensaje para las quinceañeras (opcional)</label>
+            <textarea id="mensaje" maxlength="200" placeholder="Alergias, una dedicatoria…"></textarea>
+          </div>
+
+          <button type="submit" class="enviar" id="enviar" disabled>Confirmar por WhatsApp</button>
+          <p class="nota" id="nota">Elige una opción para continuar</p>
+        </div>
+
+        <div class="gracias" id="gracias" aria-live="polite">
+          <div class="check"><svg viewBox="0 0 24 24"><path pathLength="1" d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+          <h3 id="gracias-titulo">¡Gracias, te esperamos!</h3>
+          <p id="gracias-texto"></p>
+          <div class="acciones">
+            <a class="btn-sec fuerte" id="wa" href="#" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+            <button type="button" class="btn-sec" id="cal">Agregar al calendario</button>
+          </div>
+          <button type="button" class="cambiar" id="cambiar">Cambiar mi respuesta</button>
+        </div>
       </form>
     </section>
 
@@ -286,7 +330,7 @@
   <script src="js/countdown.js"></script>
   <script src="js/gallery.js"></script>
   <script src="js/rsvp.js"></script>
-  <script src="js/effects.js"></script>             <!-- al final, después de rsvp.js -->
+  <script src="js/effects.js"></script>
 </body>
 </html>
 
