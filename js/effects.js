@@ -81,8 +81,7 @@
   $$('svg defs symbol').forEach(sym =>
     $$('path, ellipse, circle, rect', sym).forEach(e => e.setAttribute('pathLength', '1')));
   $$('#laurel text').forEach(t => t.classList.add('xv'));
-
-  const trazables = $$('.laurel, .esq, .ico');
+  const trazables = $$('.laurel, .esq, .ico').filter(el => !el.closest('#vestimenta'));
   trazables.forEach(el => el.classList.add('dibujar'));
 
   function trazar(el, retardo = 0) {

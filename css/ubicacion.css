@@ -1,0 +1,100 @@
+/* ubicacion.css — "Dónde y cuándo": líneas doradas y enlace "Ver ubicación" */
+
+html body .eventos-grid .evento { text-align: center; }
+
+.ubic-detalle {
+  --oro-h: linear-gradient(90deg, #9a7230, #f4dc96 50%, #9a7230);
+  --oro-v: linear-gradient(180deg, #9a7230, #f4dc96 50%, #9a7230);
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  margin-top: 1.2rem;
+  padding: 1.3rem 0;
+}
+.ubic-detalle::before,
+.ubic-detalle::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: var(--oro-h);
+}
+.ubic-detalle::before { top: 0; }
+.ubic-detalle::after { bottom: 0; }
+
+.ubic-hora {
+  padding: 0 .6rem;
+  font-family: var(--fuente-display);
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--uva);
+}
+.ubic-hora small {
+  display: block;
+  margin-top: .4rem;
+  font-family: var(--fuente-texto);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .25em;
+}
+.ubic-lugar {
+  position: relative;
+  padding: 0 .6rem;
+  font-size: .78rem;
+  line-height: 1.7;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.ubic-lugar::before {
+  content: "";
+  position: absolute;
+  left: 0; top: -1.3rem; bottom: -1.3rem;
+  width: 2px;
+  background: var(--oro-v);
+}
+
+/* Enlace "Ver ubicación" */
+html body .eventos-grid .evento a.mapa {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  margin-top: 1.4rem;
+  padding: .4rem .1rem;
+  font-family: var(--fuente-texto);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--uva);
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+html body .eventos-grid .evento a.mapa::before { content: none; }
+html body .eventos-grid .evento a.mapa::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+  transition: height .2s;
+}
+html body .eventos-grid .evento a.mapa svg {
+  width: 1.2em; height: 1.2em;
+  fill: none;
+  stroke: var(--dorado);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+html body .eventos-grid .evento a.mapa:hover,
+html body .eventos-grid .evento a.mapa:focus-visible {
+  background: none;
+  box-shadow: none;
+  color: var(--uva-oscuro);
+}
+html body .eventos-grid .evento a.mapa:hover::after,
+html body .eventos-grid .evento a.mapa:focus-visible::after { height: 2px; }

@@ -105,7 +105,7 @@ if (form) {
       'UID:xv-ana-zoe-2026@aclsys', 'DTSTAMP:20261001T000000Z',
       'DTSTART:20261129T003000Z', 'DTEND:20261129T070000Z',
       'SUMMARY:XV años de Ana Regina y Zoe Natalia', 'LOCATION:Cozumel\\, Q. Roo',
-      'DESCRIPTION:Ceremonia 7:30 PM · Recepción 9:00 PM · Código de vestimenta: Formal',
+      'DESCRIPTION:Ceremonia 7:30 PM · Recepción 9:00 PM · Código de vestimenta: Casual',
       'END:VEVENT', 'END:VCALENDAR'
     ].join('\r\n');
     const a = document.createElement('a');

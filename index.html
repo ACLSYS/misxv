@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="css/detalles.css">
 <link rel="stylesheet" href="css/ornamentos.css?v=4">
 <link rel="stylesheet" href="css/fotos.css?v=2">
+<link rel="stylesheet" href="css/ubicacion.css">
 <style>
   /* Ajuste de ancho (móvil): recorta lo que sobresale (ramos de las esquinas a -34px) para que la página mida
      exactamente el ancho de la pantalla. Va en línea para no depender de la caché de los .css */
@@ -266,52 +267,56 @@
             <article class="evento">
               <svg class="ico" aria-hidden="true"><use href="#i-iglesia"/></svg>
               <h3>Ceremonia religiosa</h3>
-              <p>Iglesia Guadalupe<br>[Dirección] · 7:30 PM</p>
-              <iframe title="Mapa: Parroquia de Nuestra Señora de Guadalupe"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119583.44109993443!2d-86.99415420616185!3d20.506942224379703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4e582e1964c7d9%3A0x7d7fca6b59911604!2sParroquia%20de%20Nuestra%20se%C3%B1ora%20de%20Guadalupe.!5e0!3m2!1sen!2smx!4v1792806707918!5m2!1sen!2smx"
-                style="border:0;width:100%;height:220px;margin-top:.8rem;border-radius:8px;"
-                allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-              <a class="mapa" href="#" target="_blank" rel="noopener">Ver ubicación</a>
+              <div class="ubic-detalle">
+                <div class="ubic-hora">7:30<small>PM</small></div>
+                <div class="ubic-lugar">Iglesia Guadalupe<br>[Dirección]</div>
+              </div>
+              <a class="mapa" href="https://www.google.com/maps?cid=9043169139196237316" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+                <span>Ver ubicación</span>
+              </a>
             </article>
             <article class="evento">
               <svg class="ico" aria-hidden="true"><use href="#i-pastel"/></svg>
               <h3>Recepción</h3>
-              <p>Salón de Fiestas Antares<br>[Dirección] · 9:00 PM</p>
-              <iframe title="Mapa: Salón de eventos Antares"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119583.22041837817!2d-86.9941543328377!3d20.507224918448266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f4e59b8a985b851%3A0x196da2d859d44c1!2sSal%C3%B3n%20de%20eventos%20ANTARES!5e0!3m2!1sen!2smx!4v1792806855230!5m2!1sen!2smx"
-                style="border:0;width:100%;height:220px;margin-top:.8rem;border-radius:8px;"
-                allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-              <a class="mapa" href="#" target="_blank" rel="noopener">Ver ubicación</a>
+              <div class="ubic-detalle">
+                <div class="ubic-hora">9:00<small>PM</small></div>
+                <div class="ubic-lugar">Salón de Fiestas Antares<br>[Dirección]</div>
+              </div>
+              <a class="mapa" href="https://www.google.com/maps?cid=114518729594586305" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+                <span>Ver ubicación</span>
+              </a>
             </article>
           </div>
         </section>
 
-    <!-- 07. Itinerario -->
-    <section class="reveal" id="itinerario">
-      <h2 class="titulo-seccion">Itinerario</h2>
-      <ol class="pasos">
-        <li class="paso" style="--i:0">
-          <svg class="ic" viewBox="0 0 140 120" aria-hidden="true"><use href="#ic-iglesia"/></svg>
-          <div class="txt"><span class="hora">19:30 hrs</span><svg class="flor" viewBox="0 0 120 28" aria-hidden="true"><use href="#divisor-flor"/></svg><span class="act">Ceremonia religiosa</span></div>
-        </li>
-        <li class="paso" style="--i:1">
-          <svg class="ic" viewBox="0 0 140 120" aria-hidden="true"><use href="#ic-copas"/></svg>
-          <div class="txt"><span class="hora">21:00 hrs</span><svg class="flor" viewBox="0 0 120 28" aria-hidden="true"><use href="#divisor-flor"/></svg><span class="act">Recepción de invitados</span></div>
-        </li>
-        <li class="paso" style="--i:2">
-          <svg class="ic" viewBox="0 0 140 120" aria-hidden="true"><use href="#ic-vestido"/></svg>
-          <div class="txt"><span class="hora">21:30 hrs</span><svg class="flor" viewBox="0 0 120 28" aria-hidden="true"><use href="#divisor-flor"/></svg><span class="act">Vals de XV años</span></div>
-        </li>
-        <li class="paso" style="--i:3">
-          <svg class="ic" viewBox="0 0 140 120" aria-hidden="true"><use href="#ic-cubierto"/></svg>
-          <div class="txt"><span class="hora">22:30 hrs</span><svg class="flor" viewBox="0 0 120 28" aria-hidden="true"><use href="#divisor-flor"/></svg><span class="act">Cena</span></div>
-        </li>
-        <li class="paso" style="--i:4">
-          <svg class="ic" viewBox="0 0 140 120" aria-hidden="true"><use href="#ic-disco"/></svg>
-          <div class="txt"><span class="hora">00:00 hrs</span><svg class="flor" viewBox="0 0 120 28" aria-hidden="true"><use href="#divisor-flor"/></svg><span class="act">Baile y fiesta</span></div>
-        </li>
-      </ol>
-    </section>
+       <!-- 07. Itinerario -->
+       <section class="reveal" id="itinerario">
+        <h2 class="titulo-seccion">Itinerario</h2>
+        <ol class="pasos">
+          <li class="paso" style="--i:0">
+            <svg class="ic" viewBox="0 0 140 120" aria-hidden="true"><use href="#ic-iglesia"/></svg>
+            <div class="txt"><svg class="flor" viewBox="0 0 120 28" aria-hidden="true"><use href="#divisor-flor"/></svg><span class="act">Ceremonia religiosa</span></div>
+          </li>
+          <li class="paso" style="--i:1">
+            <svg class="ic" viewBox="0 0 140 120" aria-hidden="true"><use href="#ic-copas"/></svg>
+            <div class="txt"><svg class="flor" viewBox="0 0 120 28" aria-hidden="true"><use href="#divisor-flor"/></svg><span class="act">Recepción de invitados</span></div>
+          </li>
+          <li class="paso" style="--i:2">
+            <svg class="ic" viewBox="0 0 140 120" aria-hidden="true"><use href="#ic-vestido"/></svg>
+            <div class="txt"><svg class="flor" viewBox="0 0 120 28" aria-hidden="true"><use href="#divisor-flor"/></svg><span class="act">Vals de XV años</span></div>
+          </li>
+          <li class="paso" style="--i:3">
+            <svg class="ic" viewBox="0 0 140 120" aria-hidden="true"><use href="#ic-cubierto"/></svg>
+            <div class="txt"><svg class="flor" viewBox="0 0 120 28" aria-hidden="true"><use href="#divisor-flor"/></svg><span class="act">Cena</span></div>
+          </li>
+          <li class="paso" style="--i:4">
+            <svg class="ic" viewBox="0 0 140 120" aria-hidden="true"><use href="#ic-disco"/></svg>
+            <div class="txt"><svg class="flor" viewBox="0 0 120 28" aria-hidden="true"><use href="#divisor-flor"/></svg><span class="act">Baile y fiesta</span></div>
+          </li>
+        </ol>
+      </section>
 
     <svg class="divisor" aria-hidden="true"><use href="#divisor"/></svg>
 
@@ -329,7 +334,7 @@
     <section class="reveal" id="vestimenta">
       <svg class="ico corona" viewBox="0 0 420 64" aria-hidden="true"><use href="#d-corona"/></svg>
       <h2 class="titulo-seccion">Código de vestimenta</h2>
-      <p class="formal">Formal</p>
+      <p class="formal">Casual</p>
       <svg class="ico par" viewBox="0 0 210 140" role="img" aria-label="Vestido de gala y smoking"><use href="#d-vestimenta"/></svg>
     </section>
 
