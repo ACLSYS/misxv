@@ -25,8 +25,15 @@
 <link rel="stylesheet" href="css/tipografia.css?v=3">
 <link rel="stylesheet" href="css/itinerario.css">
 <link rel="stylesheet" href="css/detalles.css">
-<link rel="stylesheet" href="css/ornamentos.css?v=3">
-<link rel="stylesheet" href="css/fotos.css">
+<link rel="stylesheet" href="css/ornamentos.css?v=4">
+<link rel="stylesheet" href="css/fotos.css?v=2">
+<style>
+  /* Ajuste de ancho (móvil): recorta lo que sobresale (ramos de las esquinas a -34px) para que la página mida
+     exactamente el ancho de la pantalla. Va en línea para no depender de la caché de los .css */
+  html { overflow-x: hidden; }
+  main { overflow-x: hidden; }
+  @supports (overflow: clip) { main { overflow-x: clip; } }
+</style>
 </head>
 <body>
 
@@ -458,4 +465,3 @@
   <script src="js/effects.js"></script>
 </body>
 </html>
-
