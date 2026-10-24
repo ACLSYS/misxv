@@ -1,0 +1,24 @@
+/* fotos.css — fotos repartidas por la invitación (arriba, centro y al final).
+   Cargar al final, después de ornamentos.css. */
+
+.foto-seccion { padding-top: 2rem; padding-bottom: 2rem; }
+.foto-seccion .galeria-grid { max-width: 440px; margin: 0 auto; padding: 0 .7rem; }   /* deja libre la enredadera de los bordes */
+
+/* Marco dorado fino separado de la foto */
+.foto-seccion .foto {
+  cursor: zoom-in;
+  outline: 1px solid rgba(202, 162, 62, .6);
+  outline-offset: 6px;
+  border-radius: 6px;
+}
+.foto-seccion .foto img {
+  max-height: 78svh; object-fit: cover; object-position: center 30%;
+}
+
+/* Al aparecer, la foto "respira": entra con un acercamiento suave */
+.js .foto-seccion .foto img { transform: scale(1.07); transition: transform 1.6s cubic-bezier(.2, .7, .2, 1); }
+.js .foto-seccion.visible .foto img { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .foto-seccion .foto img { transform: none; transition: none; }
+}
