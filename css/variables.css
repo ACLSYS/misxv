@@ -18,12 +18,15 @@
   --borde: #a98fd2;
   --boton: #4b2e6b;
 
-  /* Tipografía: UNA sola familia (Lato) en todo el sitio.
-     display / script / titulo apuntan a la misma, así nada vuelve a otra fuente. */
+  /* Tipografía:
+     texto  → Lato (cuerpo, etiquetas, botones)
+     display → Playfair Display (portada y sobre de bienvenida)
+     script → Alex Brush (sello "Abrir" y agradecimiento)
+     titulo → Libre Baskerville bold (títulos, números, tarjetas, pase RSVP) */
   --fuente-texto: 'Lato', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --fuente-display: var(--fuente-texto);
-  --fuente-script: var(--fuente-texto);
-  --fuente-titulo: var(--fuente-texto);
+  --fuente-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --fuente-script: 'Alex Brush', cursive;
+  --fuente-titulo: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
 
   /* Layout: móvil primero, se amplía en main.css con min-width */
   --ancho-contenido: 100%;
