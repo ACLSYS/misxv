@@ -1,0 +1,114 @@
+/* sobre.css — encabezado dorado del sobre de bienvenida.
+   Cargar después de main.css y effects.css. No cambia sello, fuentes ni estructura del sobre. */
+
+/* El texto existente "Nuestros XV años" baja un poco para dar lugar al encabezado */
+.bienvenida .nombre-sobre { top: 46%; }
+
+.sobre-encabezado {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 6%);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90%, 400px);
+  text-align: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Efecto dorado: degradado oro con brillo que recorre el texto */
+.oro {
+  color: #f1d98a;                               /* respaldo */
+  background: linear-gradient(105deg,
+    #e6c566 0%, #fff3c4 22%, #e0b64f 40%,
+    #fff8dc 52%, #e6c566 66%, #f7e2a0 82%, #e0b64f 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(53, 32, 77, .55))
+          drop-shadow(0 0 10px rgba(53, 32, 77, .35));  /* legibilidad sobre el morado */
+  animation: sobre-brillo 7s ease-in-out infinite;
+}
+@keyframes sobre-brillo {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+.sobre-nombres {
+  font-family: var(--fuente-script);
+  font-weight: 400;
+  font-size: clamp(2.1rem, min(11vw, 7.2vh), 3.3rem);
+  line-height: 1.02;
+}
+.sobre-xv {
+  margin-top: .5rem;
+  padding-left: .38em;                          /* compensa el espaciado de la última letra */
+  font-family: var(--fuente-display);
+  font-weight: 500;
+  font-size: .9rem;
+  letter-spacing: .38em;
+  text-transform: uppercase;
+  animation-delay: .6s;
+}
+
+/* Filete dorado con rombo central */
+.sobre-filete {
+  display: block;
+  position: relative;
+  width: min(70%, 220px);
+  height: 1px;
+  margin: .75rem auto .65rem;
+  background: linear-gradient(90deg, transparent, #f1d98a, transparent);
+}
+.sobre-filete::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 7px; height: 7px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: #f6e3a1;
+  box-shadow: 0 0 6px rgba(246, 227, 161, .8);
+}
+
+.sobre-para { margin: 0; }
+.sobre-para-etq {
+  display: block;
+  margin-bottom: .3rem;
+  font-family: var(--fuente-texto);
+  font-weight: 600;
+  font-size: .66rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  animation-delay: 1.1s;
+}
+.sobre-invitado {
+  display: block;
+  font-family: var(--fuente-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.15rem, 5vw, 1.5rem);
+  line-height: 1.25;
+  text-wrap: balance;
+  animation-delay: 1.5s;
+}
+
+/* Destellos discretos */
+.sobre-chispa {
+  position: absolute;
+  left: var(--x); top: var(--y);
+  width: var(--s); height: var(--s);
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #fff8dc, #e6c566);
+  clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+  opacity: 0;
+  animation: sobre-titila var(--d, 3s) ease-in-out var(--r, 0s) infinite;
+}
+@keyframes sobre-titila {
+  0%, 100% { opacity: .1;  transform: translate(-50%, -50%) scale(.6) rotate(0deg); }
+  50%      { opacity: .95; transform: translate(-50%, -50%) scale(1) rotate(20deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oro { animation: none; }
+  .sobre-chispa { animation: none; opacity: .6; }
+}

@@ -3,7 +3,8 @@
    Cargar al final, después de detalles.css. */
 
 /* ---------- 1. Enredadera con flores en los dos bordes, de arriba a abajo del <main> ---------- */
-main { position: relative; }
+main { position: relative; overflow-x: hidden; }          /* los ramos de las esquinas salen -34px: sin esto la página se ensancha */
+@supports (overflow: clip) { main { overflow-x: clip; } }
 main::before, main::after {
   content: ""; position: absolute; top: 0; bottom: 0; width: 20px;
   pointer-events: none; z-index: 0; opacity: .7;
