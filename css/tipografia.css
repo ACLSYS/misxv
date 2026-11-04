@@ -2,7 +2,9 @@
    Títulos y números: Libre Baskerville bold · Texto: Lato regular, más grande.
    Cargar al final, después de effects.css. */
 
-:root { --fuente-titulo: "Libre Baskerville", Georgia, "Times New Roman", serif; }
+:root {
+  --fuente-titulo: "Libre Baskerville", Georgia, "Times New Roman", serif;
+}
 
 /* ---------- Títulos de sección ---------- */
 .titulo-seccion {
@@ -14,46 +16,155 @@
 }
 
 /* ---------- Texto ---------- */
-.texto { font-weight: 400; font-size: 1.14rem; line-height: 1.7; }
-.texto strong { font-weight: 700; }
-.bloque-extra .texto:first-child {          /* "Nuestra mamá", "Padrinos de…" */
-  font-weight: 700; font-size: .92rem; letter-spacing: .12em; text-transform: uppercase;
+.texto {
+  font-weight: 400;
+  font-size: 1.14rem;
+  line-height: 1.7;
+}
+
+.texto strong {
+  font-weight: 700;
+}
+
+.bloque-extra .texto:first-child {
+  /* "Nuestra mamá", "Padrinos de…" */
+  font-weight: 700;
+  font-size: .92rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
   color: var(--acento-texto);
 }
 
 /* ---------- Cuenta regresiva ---------- */
 .regresiva .num {
-  font-family: var(--fuente-titulo); font-weight: 700;
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
   font-size: clamp(1.8rem, 9vw, 2.3rem);
 }
-.regresiva .label { font-weight: 700; font-size: .72rem; letter-spacing: .12em; }
+
+.regresiva .label {
+  font-weight: 700;
+  font-size: .72rem;
+  letter-spacing: .12em;
+}
 
 /* ---------- Tarjetas de evento e itinerario ---------- */
-.evento h3 { font-family: var(--fuente-titulo); font-weight: 700; font-size: 1.15rem; line-height: 1.25; }
-.evento p { font-weight: 400; font-size: 1.08rem; line-height: 1.6; }
-.evento .mapa { font-weight: 700; font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; }
-.itinerario .hora { font-weight: 700; font-size: .85rem; letter-spacing: .12em; }
-.itinerario .actividad { font-family: var(--fuente-titulo); font-weight: 700; font-size: 1.15rem; line-height: 1.25; }
+.evento h3 {
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+.evento p {
+  font-weight: 400;
+  font-size: 1.08rem;
+  line-height: 1.6;
+}
+
+.evento .mapa {
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.itinerario .hora {
+  font-weight: 700;
+  font-size: .85rem;
+  letter-spacing: .12em;
+}
+
+.itinerario .actividad {
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
 
 /* ---------- Botones ---------- */
-.boton, .enviar { font-weight: 700; font-size: .95rem; letter-spacing: .12em; text-transform: uppercase; }
+.boton,
+.enviar {
+  font-weight: 700;
+  font-size: .95rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
 
 /* ---------- RSVP (pase de entrada) ---------- */
-.nombre-inv { font-family: var(--fuente-titulo); font-weight: 400; font-style: italic; font-size: 1.6rem; line-height: 1.2; }
-.eyebrow { font-weight: 700; }
-.dato { font-weight: 600; font-size: .82rem; }
-.pregunta { font-weight: 700; }
-.eleccion span { font-weight: 700; font-size: 1.02rem; }
-.cuenta output { font-family: var(--fuente-titulo); font-weight: 700; font-size: 2rem; }
-.gracias h3 { font-family: var(--fuente-titulo); font-weight: 700; font-size: 1.4rem; line-height: 1.25; }
-.gracias p { font-weight: 400; font-size: 1.05rem; }
-.btn-sec { font-weight: 700; font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; }
-.pase textarea, .campo-nombre input { font-family: var(--fuente-texto); font-weight: 400; }
+.nombre-inv {
+  font-family: var(--fuente-titulo);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+.eyebrow {
+  font-weight: 700;
+}
+
+.dato {
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: .4rem .95rem;
+}
+
+.dato b {
+  font-size: 1.35em;
+}
+
+.pregunta {
+  font-weight: 700;
+}
+
+.eleccion span {
+  font-weight: 700;
+  font-size: 1.02rem;
+}
+
+.cuenta output {
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.gracias h3 {
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1.25;
+}
+
+.gracias p {
+  font-weight: 400;
+  font-size: 1.05rem;
+}
+
+.btn-sec {
+  font-weight: 700;
+  font-size: .85rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.pase textarea,
+.campo-nombre input {
+  font-family: var(--fuente-texto);
+  font-weight: 400;
+}
 
 /* ---------- Footer ---------- */
-footer { font-size: 1rem; }
+footer {
+  font-size: 1rem;
+}
 
 @media (min-width: 600px) {
-  .titulo-seccion { font-size: 1.9rem; }
-  .texto { font-size: 1.2rem; }
+  .titulo-seccion {
+    font-size: 1.9rem;
+  }
+
+  .texto {
+    font-size: 1.2rem;
+  }
 }
