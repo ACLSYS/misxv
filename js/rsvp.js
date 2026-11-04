@@ -4,9 +4,23 @@ const form = document.getElementById('rsvp-form');
 
 if (form) {
   const $ = id => document.getElementById(id);
-  const WHATSAPP_NUMERO = form.dataset.whatsapp || '529871163233';
-  const datos = window.invitacion || { invitado: '', pases: 4, pasesDesdeUrl: false, mesa: '' };
+  const reducirMov = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // WhatsApp: solo dígitos, con código de país (se cambia en data-whatsapp del <form>)
+  const WHATSAPP_NUMERO = (form.dataset.whatsapp || '529871163233').replace(/\D/g, '');
+  const datos = window.invitacion || { invitado: '', pases: 4, pasesDesdeUrl: false, mesa: '', esAmigos: false };
   const maxPases = datos.pases;
+
+  const btn = $('enviar'), nota = $('nota'), bloque = $('bloque-pases');
+  const inputNombre = $('rsvp-nombre');
+
+  // ---------- Aviso debajo del botón ----------
+  function aviso(texto, tipo = '') {
+    nota.textContent = texto;
+    nota.dataset.tipo = tipo;
+    nota.style.visibility = 'visible';
+  }
+  function quitaAviso() { nota.style.visibility = 'hidden'; }
 
   // ---------- Datos del encabezado ----------
   if (datos.pasesDesdeUrl) {
@@ -18,7 +32,7 @@ if (form) {
     $('dato-mesa').textContent = datos.mesa;
     $('dato-mesa-wrap').hidden = false;
   }
-  // Link sin ?invitado=: se pide el nombre
+  // Link sin nombre (general o "amigos"): se pide el nombre
   if (!datos.invitado) $('campo-nombre').hidden = false;
 
   // ---------- Días para confirmar ----------
@@ -26,12 +40,11 @@ if (form) {
   const dias = Math.ceil((limite - new Date()) / 864e5);
   $('limite-txt').textContent =
     dias > 1 ? `Quedan ${dias} días para confirmar` :
-    dias === 1 ? 'Último día para confirmar' : 'Confirma a la brevedad';
+      dias === 1 ? 'Último día para confirmar' : 'Confirma a la brevedad';
 
   // ---------- Contador de asistentes ----------
-  const btn = $('enviar'), nota = $('nota'), bloque = $('bloque-pases');
   const num = $('num'), menos = $('menos'), mas = $('mas');
-  let n = maxPases;                                  // por defecto, todos los pases
+  let n = datos.pasesDesdeUrl ? maxPases : 1;   // link con pases: todos · link general: 1
   $('max-txt').textContent = maxPases === 1 ? 'de 1 pase' : `de ${maxPases} pases`;
 
   function pinta(animar) {
@@ -49,20 +62,31 @@ if (form) {
     radio.addEventListener('change', () => {
       bloque.classList.toggle('cerrado', radio.value === 'no');
       btn.disabled = false;
-      nota.style.visibility = 'hidden';
+      quitaAviso();
     });
+  });
+
+  // El aviso del nombre desaparece en cuanto empiezan a escribir
+  inputNombre.addEventListener('input', () => {
+    if (nota.dataset.tipo === 'nombre') quitaAviso();
   });
 
   // ---------- Enviar ----------
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const inputNombre = $('rsvp-nombre');
-    const nombre = datos.invitado || inputNombre.value.trim();
+    const nombre = (datos.invitado || inputNombre.value).trim().replace(/\s+/g, ' ').slice(0, 60);
     const asiste = form.querySelector('input[name="asiste"]:checked');
 
-    if (!nombre) { inputNombre.focus(); return; }
-    if (!asiste) return;
+    if (!nombre) {
+      aviso('Escribe tu nombre para continuar', 'nombre');
+      inputNombre.focus();
+      return;
+    }
+    if (!asiste) {
+      aviso('Elige una opción para continuar');
+      return;
+    }
 
     const si = asiste.value === 'si';
     const mensajeExtra = $('mensaje').value.trim();
@@ -73,6 +97,7 @@ if (form) {
     if (mensajeExtra) mensaje += `\nMensaje: ${mensajeExtra}`;
     if (datos.pasesDesdeUrl) mensaje += `\n(Pases de la invitación: ${maxPases})`;
     if (datos.mesa) mensaje += `\n(Mesa: ${datos.mesa})`;
+    if (datos.esAmigos) mensaje += '\n(Invitación general: amigos)';
 
     const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensaje)}`;
     $('wa').href = url;
@@ -84,6 +109,7 @@ if (form) {
       : 'Lamentamos que no puedas acompañarnos. Si WhatsApp no se abrió, toca el botón verde.';
     $('cal').hidden = !si;
     form.classList.add('listo');
+    form.scrollIntoView({ behavior: reducirMov ? 'auto' : 'smooth', block: 'center' });
 
     // Confeti dorado (viene de effects.js; si no está, simplemente no hay confeti)
     if (window.efectos) {
@@ -100,22 +126,29 @@ if (form) {
 
   // ---------- Agregar al calendario (.ics) ----------
   $('cal').addEventListener('click', () => {
+    const ahora = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
     const ics = [
       'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//XV Ana y Zoe//ES', 'BEGIN:VEVENT',
-      'UID:xv-ana-zoe-2026@aclsys', 'DTSTAMP:20261001T000000Z',
+      'UID:xv-ana-zoe-2026@aclsys', `DTSTAMP:${ahora}`,
       'DTSTART:20261129T003000Z', 'DTEND:20261129T070000Z',
-      'SUMMARY:XV años de Ana Regina y Zoe Natalia', 'LOCATION:Cozumel\\, Q. Roo',
+      'SUMMARY:XV años de Ana Regina y Zoe Natalia',
+      'LOCATION:Iglesia Guadalupe\\, Cozumel\\, Q. Roo',
       'DESCRIPTION:Ceremonia 7:30 PM · Recepción 9:00 PM · Código de vestimenta: Casual',
+      'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY',
+      'DESCRIPTION:Mañana son los XV de Ana Regina y Zoe Natalia', 'END:VALARM',
       'END:VEVENT', 'END:VCALENDAR'
     ].join('\r\n');
+
+    const urlIcs = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+    a.href = urlIcs;
     a.download = 'xv-ana-y-zoe.ics';
     document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(urlIcs), 2000);
   });
 
   // ---------- Inclinación 3D + reflejo al tocar el encabezado (el scroll vertical sigue libre) ----------
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (!reducirMov) {
     const cab = $('pase-cabeza');
     let abajo = false;
     const reset = () => {
